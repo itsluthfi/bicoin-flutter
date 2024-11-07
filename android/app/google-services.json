@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "101010297288",
+    "project_id": "dev-coinku",
+    "storage_bucket": "dev-coinku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101010297288:android:b8010c215ec0a50e4cf0fd",
+        "android_client_info": {
+          "package_name": "com.example.dev_coinku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsMENXNDUTE2cQin0qE6HildIzZDnZ8J8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
