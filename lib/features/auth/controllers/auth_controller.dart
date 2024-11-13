@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../core/constants/key_constant.dart';
-import '../../../core/services/firestore_service.dart';
+// import '../../../core/services/firestore_service.dart';
 import '../../../core/services/network_service.dart';
 import '../../../core/styles/dev_color.dart';
-import '../../../core/utils/generator_util.dart';
+// import '../../../core/utils/generator_util.dart';
 import '../../dashboard/navbar_screen.dart';
 import '../presentation/screens/login_screen.dart';
 
@@ -19,44 +19,44 @@ class AuthController extends GetxController {
   var isSuccess = false.obs;
   final box = GetStorage();
   RxList<dynamic> dataUsers = <dynamic>[].obs;
-  FirestoreService firestoreService = FirestoreService();
+  // FirestoreService firestoreService = FirestoreService();
   final fcmService = FcmService();
 
   @override
   void onInit() {
-    getUserDataList();
+    // getUserDataList();
     super.onInit();
   }
 
-  void getUserDataList() async {
-    try {
-      final response = await DioService.instance.getRequest(
-        '/org.meetcoin.participant.Users',
-      );
-
-      dataUsers.value = response.data;
-      log(response.data.toString());
-    } catch (e) {
-      log(e.toString());
-    }
-  }
-
-  dynamic findUser(
-    String username, {
-    String? email,
-    String? password,
-  }) {
-    return dataUsers.firstWhere(
-      (user) => user['username'] == username && user['password'] == password,
-      orElse: () => null,
-    );
-  }
+  // void getUserDataList() async {
+  //   try {
+  //     final response = await DioService.instance.getRequest(
+  //       '/org.meetcoin.participant.Users',
+  //     );
+  //
+  //     dataUsers.value = response.data;
+  //     log(response.data.toString());
+  //   } catch (e) {
+  //     log(e.toString());
+  //   }
+  // }
+  //
+  // dynamic findUser(
+  //   String username, {
+  //   String? email,
+  //   String? password,
+  // }) {
+  //   return dataUsers.firstWhere(
+  //     (user) => user['username'] == username && user['password'] == password,
+  //     orElse: () => null,
+  //   );
+  // }
 
   Future<void> login(String username, String password) async {
     try {
-      var user = await findUser(username, password: password) != null;
+      // var user = await findUser(username, password: password) != null;
       await box.write(KeyConstant.username, username);
-      if (user) {
+      if (true) {
         isSuccess(true);
         isLoading(true);
         errorMessage('');
@@ -89,17 +89,17 @@ class AuthController extends GetxController {
   }
 
   Future<void> register(
-    String username,
-    String name,
-    String email,
-    String phone,
-    String password,
+      String name,
+      String email,
+      String username,
+      String phone,
+      String password,
   ) async {
-    var isUserExist =
-        await findUser(username) != null || findUser('', email: email) != null;
+    // var isUserExist =
+    //     await findUser(username) != null || findUser('', email: email) != null;
 
     try {
-      if (isUserExist) {
+      if (false) {
         isLoading(true);
         isSuccess(false);
         errorMessage('Username or Email already exist');
@@ -117,31 +117,30 @@ class AuthController extends GetxController {
         errorMessage('');
 
         var bodyRequest = {
-          '\$class': 'org.meetcoin.participant.Users',
-          'username': username.toLowerCase(),
           'name': name,
           'email': email,
-          'no_telp': phone,
+          'username': username,
+          'phone': phone,
           'password': password,
         };
 
-        var bankAccount = generateRandomBankAccountNumber();
+        // var bankAccount = generateRandomBankAccountNumber();
 
         try {
           await DioService.instance.postRequest(
-            '/org.meetcoin.participant.Users',
+            '/register',
             bodyRequest,
           );
 
-          // send data to firestrore
-          await firestoreService.setData('users', username, {
-            'username': username.toLowerCase(),
-            'name': name,
-            'email': email,
-            'no_telp': phone,
-            'bankAccount': bankAccount,
-            'type_bank': 'coinku',
-          });
+          // // send data to firestrore
+          // await firestoreService.setData('users', username, {
+          //   'username': username.toLowerCase(),
+          //   'name': name,
+          //   'email': email,
+          //   'no_telp': phone,
+          //   'bankAccount': bankAccount,
+          //   'type_bank': 'coinku',
+          // });
 
           Get.snackbar(
             'Register Success',
