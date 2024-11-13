@@ -10,7 +10,7 @@ class DioService {
 
   DioService._internal() {
     _dio = Dio(BaseOptions(
-      baseUrl: "https://779v37p4-3000.asse.devtunnels.ms/api",
+      baseUrl: "http://localhost:8080/api",
       connectTimeout: const Duration(milliseconds: 5000),
       receiveTimeout: const Duration(milliseconds: 3000),
     ));
