@@ -10,9 +10,9 @@ class DioService {
 
   DioService._internal() {
     _dio = Dio(BaseOptions(
-      baseUrl: "http://localhost:8080/api",
-      connectTimeout: const Duration(milliseconds: 5000),
-      receiveTimeout: const Duration(milliseconds: 3000),
+      baseUrl: "http://10.0.2.2:8080/api",
+      connectTimeout: const Duration(milliseconds: 60000),
+      receiveTimeout: const Duration(milliseconds: 60000),
     ));
   }
 
