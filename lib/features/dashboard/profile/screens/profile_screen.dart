@@ -44,11 +44,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = profileController.user;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Obx(() {
-          final user = profileController.user;
-
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       radius: 40,
                       backgroundColor: Colors.white,
                       child: Text(
-                        user.value!.name.toString().getInitials(),
+                        "${user.value?.username.toString().getInitials()}",
                         style: const TextStyle(
                           color: Color(0xFF003366),
                           fontSize: 40,
@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      user.value!.name.toString().toCamelCase(),
+                      "${user.value?.name.toString().toCamelCase()}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -86,9 +86,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildProfileItem('Nomor Handphone', user.value!.noTelp),
-                    buildProfileItem('Alamat Email', user.value!.email),
-                    buildProfileItem('Username', user.value!.username),
+                    buildProfileItem(
+                        'Nomor Handphone', "${user.value?.noTelp}"),
+                    buildProfileItem('Alamat Email', "${user.value?.email}"),
+                    buildProfileItem('Username', "${user.value?.username}"),
                     buildProfileItem('Bahasa', 'Indonesia'),
                   ],
                 ),

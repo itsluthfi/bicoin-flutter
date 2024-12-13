@@ -19,16 +19,18 @@ class ProfileController extends GetxController {
 
   void getUserDetail() async {
     var getUsername = await box.read(KeyConstant.username);
+    print(getUsername);
 
     try {
       final response = await DioService.instance.getRequest(
-        '/org.meetcoin.participant.Users/$getUsername',
+        '/api/user/detail',
+        // '/org.meetcoin.participant.Users/$getUsername',
       );
 
       final Map<String, dynamic> result = response.data;
       log(result.toString());
 
-      user.value = UserModel.fromJson(result);
+      user.value = UserModel.fromJson(result['data']);
     } catch (e) {
       log(e.toString());
     }

@@ -22,7 +22,6 @@ class FcmService {
     log('FCM Token: $fCMToken');
 
     initPushNotifications();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log('Got a message whilst in the foreground!');
       log('Message data: ${message.data}');
@@ -46,12 +45,12 @@ class FcmService {
     );
   }
 
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    await Firebase.initializeApp();
-    log("Handling a background message: ${message.messageId}");
-  }
+  // @pragma('vm:entry-point')
+  // Future<void> _firebaseMessagingBackgroundHandler(
+  //     RemoteMessage message) async {
+  //   await Firebase.initializeApp();
+  //   log("Handling a background message: ${message.messageId}");
+  // }
 
   Future<void> initPushNotifications() async {
     FirebaseMessaging.instance.getInitialMessage().then(handleMessage);

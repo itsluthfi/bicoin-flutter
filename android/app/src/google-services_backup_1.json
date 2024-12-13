@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "101010297288",
     "project_id": "dev-coinku",
-    "storage_bucket": "dev-coinku.firebasestorage.app"
+    "storage_bucket": "dev-coinku.appspot.com"
   },
   "client": [
     {

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dev_coinku/features/notification/screens/notification_screen.dart';
 import 'package:dev_coinku/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,12 +26,26 @@ void main() async {
     name: 'dev-coinku',
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  // await Firebase.initializeApp(
+  //   name: 'dev-coinku',
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   await NotificationService.initNotification();
 
   await GetStorage.init();
-
   await FcmService().initFCM();
+
   runApp(const MainApp());
+}
+
+// @pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  log("Handling a background message: ${message.messageId}");
 }
 
 class MainApp extends StatelessWidget {

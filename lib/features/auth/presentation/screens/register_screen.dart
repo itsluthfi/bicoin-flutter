@@ -105,9 +105,9 @@ class RegisterScreen extends StatelessWidget {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           authC.register(
+                            usernameController.text,
                             nameController.text,
                             emailController.text,
-                            usernameController.text,
                             phoneController.text,
                             passwordController.text,
                           );
