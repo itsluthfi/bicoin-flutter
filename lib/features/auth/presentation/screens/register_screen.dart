@@ -1,4 +1,6 @@
+import 'package:dev_coinku/core/services/auth_service.dart';
 import 'package:dev_coinku/core/widgets/dev_popup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +36,7 @@ class RegisterScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/intro_logo.png',
+                'assets/intro_logoo.png',
                 fit: BoxFit.cover,
                 scale: 1.5,
               ),
@@ -73,7 +75,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               DevTextField(
-                title: 'Name',
+                title: 'Nama',
                 controller: nameController,
               ),
               const SizedBox(height: 10),
@@ -83,7 +85,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               DevTextField(
-                title: 'Phone',
+                title: 'Nomor telepon',
                 controller: phoneController,
                 keyboardType: TextInputType.number,
               ),
@@ -102,7 +104,7 @@ class RegisterScreen extends StatelessWidget {
                     width: double.infinity,
                     child: DevButton(
                       title: 'Daftar',
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           authC.register(
                             usernameController.text,
@@ -145,7 +147,7 @@ class RegisterScreen extends StatelessWidget {
                         Get.toNamed(LoginScreen.route);
                       },
                       child: Text(
-                        'Login',
+                        'Masuk',
                         style: DevTypograph.body1.medium,
                       ),
                     ),

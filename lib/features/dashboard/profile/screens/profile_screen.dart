@@ -1,3 +1,4 @@
+import 'package:dev_coinku/core/services/auth_service.dart';
 import 'package:dev_coinku/core/services/fcm_service.dart';
 import 'package:dev_coinku/core/utils/format_util.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final profileController = Get.put(ProfileController());
   final fcmService = FcmService();
   final box = GetStorage();
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void logout() async {
     await box.remove(KeyConstant.username);
+    await _authService.logout();
     await fcmService.unsubscribeFromTopic('coinku');
     Get.snackbar(
       'Logout Success',
@@ -86,8 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    buildProfileItem(
-                        'Nomor Handphone', "${user.value?.noTelp}"),
+                    buildProfileItem('Nomor Telepon', "${user.value?.noTelp}"),
                     buildProfileItem('Alamat Email', "${user.value?.email}"),
                     buildProfileItem('Username', "${user.value?.username}"),
                     buildProfileItem('Bahasa', 'Indonesia'),
@@ -105,13 +107,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(children: [
                     const Icon(
                       Icons.logout_sharp,
-                      color: DevColor.redColor,
+                      color: DevColor.orange,
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      'Logout',
+                      'Keluar',
                       style: DevTypograph.body1.bold.copyWith(
-                        color: DevColor.redColor,
+                        color: DevColor.orange,
                       ),
                     ),
                   ]),

@@ -224,6 +224,7 @@ class DevTypograph {
   );
 
   //* Body 1
+
   static Typograph body1 = Typograph(
     light: const TextStyle(
       fontFamily: _fontName,

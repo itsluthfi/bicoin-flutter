@@ -17,7 +17,8 @@ class HomeController extends GetxController {
     var usernameId = await box.read(KeyConstant.username);
     try {
       final snapshot = await firestoreService.getCollection('users').then(
-            (value) => value.docs.where((doc) => doc.id == usernameId).toList(),
+            (value) =>
+                value.docs.where((doc) => doc['email'] == usernameId).toList(),
           );
 
       if (snapshot.isNotEmpty) {

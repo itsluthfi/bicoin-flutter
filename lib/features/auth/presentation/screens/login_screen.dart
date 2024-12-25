@@ -1,7 +1,9 @@
+import 'package:dev_coinku/core/services/auth_service.dart';
 import 'package:dev_coinku/features/auth/presentation/screens/register_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../../core/styles/dev_color.dart';
 import '../../../../core/styles/typography.dart';
 import '../../../../core/widgets/dev_button.dart';
 import '../../../../core/widgets/dev_popup.dart';
@@ -43,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/intro_logo.png',
+                'assets/intro_logoo.png',
                 fit: BoxFit.cover,
                 scale: 1.5,
               ),
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Login',
+                'Masuk',
                 style: DevTypograph.heading2.bold,
               ),
               Text(
@@ -77,7 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 24),
               DevTextField(
-                title: 'Username',
+                title: 'Email',
+                // colorBorder: DevColor.darkblue,
                 controller: usernameController,
               ),
               const SizedBox(height: 10),
@@ -94,8 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   return SizedBox(
                     width: double.infinity,
                     child: DevButton(
-                      title: 'Login',
-                      onPressed: () {
+                      title: 'Masuk',
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           authC.login(
                             usernameController.text,

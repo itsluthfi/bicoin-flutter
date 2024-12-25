@@ -26,14 +26,12 @@ class _WithdrawlScreenState extends State<WithdrawlScreen> {
   @override
   void initState() {
     transactionDifferentController.getAllBank();
-    // transactionDifferentController.getAllBankList();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     transactionController.bankAccount.value;
-    // transactionDifferentController.getAllBank();
     super.didChangeDependencies();
   }
 
@@ -46,7 +44,7 @@ class _WithdrawlScreenState extends State<WithdrawlScreen> {
         backgroundColor: DevColor.darkblue,
         elevation: 0,
         title: Text(
-          'Transfer Antar Bank',
+          'Penarikan Saldo',
           style: DevTypograph.heading3.bold.copyWith(
             color: DevColor.whiteColor,
           ),
@@ -73,46 +71,49 @@ class _WithdrawlScreenState extends State<WithdrawlScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Rekening Bank Kamu',
-              style: DevTypograph.heading2.bold.copyWith(
-                color: DevColor.darkblue,
+            // Kotak untuk Rekening Bank Kamu
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: DevColor.darkblue, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Rekening Bank Kamu',
+                      style: DevTypograph.heading2.bold.copyWith(
+                        color: DevColor.darkblue,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      return Text(
+                        'No. Rekening: ${transactionController.bankAccount}',
+                        style: DevTypograph.body1.bold.copyWith(
+                          color: DevColor.darkblue,
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      final saldo = transactionController.saldoAmount.value;
+                      return Text(
+                        'Saldo: Rp ${NumberFormat('#,##0', 'ID').format(saldo)}',
+                        style: DevTypograph.body1.bold.copyWith(
+                          color: DevColor.darkblue,
+                        ),
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
             const SizedBox(
-              height: 5,
-            ),
-            Obx(() {
-              return Text(
-                'No. Rekening : ${transactionController.bankAccount}',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
-                ),
-              );
-            }),
-            const SizedBox(
-              height: 5,
-            ),
-            Obx(() {
-              final saldo = transactionController.saldoAmount.value;
-              return Text(
-                'Saldo : Rp ${NumberFormat('#,##0', 'ID').format(saldo)}',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
-                ),
-              );
-            }),
-            SizedBox(
-              height: dWidth / 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-               
-              ],
-            ),
-            SizedBox(
-              height: dWidth / 20,
+              height: 24,
             ),
             isSameBank
                 ? SameBankComponent(dWidth: dWidth)

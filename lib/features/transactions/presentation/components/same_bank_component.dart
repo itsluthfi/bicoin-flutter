@@ -22,7 +22,7 @@ class SameBankComponent extends StatefulWidget {
 
 class _SameBankComponentState extends State<SameBankComponent> {
   final bankTujuan = TextEditingController(
-    text: 'Bank Coinku',
+    text: 'Bank BiCoin',
   );
   final rekeningTujuan = TextEditingController();
   final nominal = TextEditingController();
@@ -50,13 +50,13 @@ class _SameBankComponentState extends State<SameBankComponent> {
           amount,
           rekeningTujuan.text,
           'SUCCESS',
-          'coinku',
+          'BiCoin',
           0,
         );
 
         await transactionController.fillBankCredit(
           amount,
-          'coinku',
+          'BiCoin',
           bankAccount: rekeningTujuan.text,
           adminFee: 0,
         );
@@ -66,7 +66,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
         log('Transaksi berhasil dilakukan');
         transactionController.loadInitialData();
         Get.snackbar(
-          'Success',
+          'Sukses',
           'Transfer ke Rekening ${rekeningTujuan.text} berhasil',
           backgroundColor: DevColor.greenColor,
           colorText: DevColor.whiteColor,
@@ -82,7 +82,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
           amount,
           rekeningTujuan.text,
           'FAILED',
-          'coinku',
+          'BiCoin',
           0,
         );
         Get.snackbar(
@@ -115,9 +115,9 @@ class _SameBankComponentState extends State<SameBankComponent> {
           DevTextField(
             title: 'Bank Tujuan',
             readOnly: true,
-            styleTitle: DevTypograph.body1.bold.copyWith(
-              color: DevColor.darkblue,
-            ),
+            // styleTitle: DevTypograph.body1.bold.copyWith(
+            //   color: DevColor.darkblue,
+            // ),
             colorBorder: DevColor.darkblue,
             controller: bankTujuan,
           ),
@@ -126,9 +126,9 @@ class _SameBankComponentState extends State<SameBankComponent> {
           ),
           DevTextField(
             title: 'Rekening Tujuan',
-            styleTitle: DevTypograph.body1.bold.copyWith(
-              color: DevColor.darkblue,
-            ),
+            // styleTitle: DevTypograph.body1.bold.copyWith(
+            //   color: DevColor.darkblue,
+            // ),
             keyboardType: TextInputType.number,
             colorBorder: DevColor.darkblue,
             controller: rekeningTujuan,
@@ -138,9 +138,9 @@ class _SameBankComponentState extends State<SameBankComponent> {
           ),
           DevTextField(
             title: 'Nominal',
-            styleTitle: DevTypograph.body1.bold.copyWith(
-              color: DevColor.darkblue,
-            ),
+            // styleTitle: DevTypograph.body1.bold.copyWith(
+            //   color: DevColor.darkblue,
+            // ),
             keyboardType: TextInputType.number,
             colorBorder: DevColor.darkblue,
             controller: nominal,
@@ -218,7 +218,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
                 ),
               ),
               Text(
-                'Admin Fee: Rp 0',
+                'Biaya Admin: Rp 0',
                 style: DevTypograph.body1.bold.copyWith(
                   color: DevColor.darkblue,
                 ),

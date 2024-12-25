@@ -12,6 +12,7 @@ class DevDropdownSearchForm extends StatelessWidget {
     required this.title,
     required this.dataItems,
     this.hint,
+    this.styleTitle,
     this.onSaved,
     this.onChanged,
     this.colorBorder,
@@ -23,6 +24,7 @@ class DevDropdownSearchForm extends StatelessWidget {
   final String title;
   final List<String> dataItems;
   final String? hint;
+  final TextStyle? styleTitle;
   final Function(String?)? onSaved;
   final Function(String?)? onChanged;
   final Color? colorBorder;
@@ -114,7 +116,7 @@ class DevDropdownSearchForm extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                selectedItem ?? hint ?? 'Please Select',
+                selectedItem ?? hint ?? 'Pilh bank tujuan',
                 style: DevTypograph.body1.light.copyWith(
                   color: uniqueItems.contains(selectedItem)
                       ? null
@@ -127,7 +129,7 @@ class DevDropdownSearchForm extends StatelessWidget {
           validator: (value) {
             log('Item selected: $value');
             if (value == null) {
-              return 'Please select $title';
+              return 'Pilh bank tujuan $title';
             }
             return null;
           },

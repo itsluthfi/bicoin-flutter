@@ -1,6 +1,6 @@
 import 'dart:math';
 
-String generateRandomBankAccountNumber({int length = 16}) {
+String generateRandomBankAccountNumber({int length = 8}) {
   final random = Random();
   String accountNumber = '';
 

@@ -42,7 +42,7 @@ class _HistoryTransferScreenState extends State<HistoryTransferScreen> {
       appBar: AppBar(
         backgroundColor: DevColor.darkblue,
         title: Text(
-          'History Transfer',
+          'Riwayat ',
           style: DevTypograph.heading3.bold.copyWith(
             color: DevColor.whiteColor,
           ),
@@ -65,7 +65,7 @@ class _HistoryTransferScreenState extends State<HistoryTransferScreen> {
                 String accountLabel = dataItemHistory.type == 'credit' &&
                         dataItemHistory.sourceRekening != currentRek.toString()
                     ? 'Dari Akun'
-                    : 'Ke Akun';
+                    : '';
 
                 return cardListTransfer(
                   dataItemHistory.date,
@@ -123,7 +123,7 @@ class _HistoryTransferScreenState extends State<HistoryTransferScreen> {
                 ),
               ),
               Text(
-                'Admin Fee ${adminFee.toRupiah()}',
+                'Biaya Admin ${adminFee.toRupiah()}',
                 style: DevTypograph.body1.medium.copyWith(
                   color: DevColor.darkblue,
                 ),

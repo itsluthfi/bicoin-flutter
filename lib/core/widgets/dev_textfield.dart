@@ -55,7 +55,7 @@ class DevTextField extends StatelessWidget {
                   vertical: 10,
                   horizontal: 18,
                 ),
-                hintText: 'Please enter your ${title.toLowerCase()}',
+                hintText: 'Masukan ${title.toLowerCase()} anda',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
@@ -96,7 +96,7 @@ class DevTextField extends StatelessWidget {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your ${title.toLowerCase()}';
+                  return 'Masukan ${title.toLowerCase()} anda';
                 }
                 return null;
               },

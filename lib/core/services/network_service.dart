@@ -15,7 +15,7 @@ class DioService {
     final box = GetStorage();
 
     _dio = Dio(BaseOptions(
-      baseUrl: "https://5265-66-96-225-164.ngrok-free.app/",
+      baseUrl: "https://3cfd-149-113-74-23.ngrok-free.app",
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${box.read(KeyConstant.token)}'
@@ -23,7 +23,7 @@ class DioService {
     ));
 
     _dioAuth = Dio(BaseOptions(
-      baseUrl: "https://5265-66-96-225-164.ngrok-free.app/",
+      baseUrl: "https://3cfd-149-113-74-23.ngrok-free.app",
       headers: {
         'Content-Type': 'application/json',
       },

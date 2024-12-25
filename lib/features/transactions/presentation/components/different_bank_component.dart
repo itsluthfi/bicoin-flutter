@@ -34,7 +34,6 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
 
   @override
   void initState() {
-    // transactionController.getAllBank();
     super.initState();
   }
 
@@ -56,12 +55,12 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
       await transactionControl.loadInitialData();
     }
     if (mounted) {
-       Get.snackbar(
-      'Succes',
-      'Transaksi Berhasil',
-      backgroundColor: DevColor.greenColor,
-      colorText: DevColor.whiteColor,
-    );
+      Get.snackbar(
+        'Sukses',
+        'Transaksi Berhasil',
+        backgroundColor: DevColor.greenColor,
+        colorText: DevColor.whiteColor,
+      );
       Navigator.pop(context);
     }
   }
@@ -75,7 +74,11 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
         children: [
           DevDropdownSearchForm(
             title: 'Bank Tujuan',
+            styleTitle: DevTypograph.body1.bold.copyWith(
+              color: DevColor.darkblue,
+            ),
             controller: bankTujuanController,
+            colorBorder: DevColor.darkblue,
             onChanged: (value) {
               setState(() {
                 selectedBank = value!;
@@ -87,9 +90,13 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
             height: widget.dWidth / 20,
           ),
           DevTextField(
-            title: 'Rekening',
+            title: 'Rekening Tujuan',
+            // styleTitle: DevTypograph.body1.bold.copyWith(
+            //   color: DevColor.darkblue,
+            // ),
             keyboardType: TextInputType.number,
             controller: rekeningController,
+            colorBorder: DevColor.darkblue,
           ),
           SizedBox(
             height: widget.dWidth / 40,
@@ -98,6 +105,7 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
             title: 'Nominal',
             keyboardType: TextInputType.number,
             controller: nominalController,
+            colorBorder: DevColor.darkblue,
           ),
           SizedBox(
             height: widget.dWidth / 10,
@@ -113,106 +121,101 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
       ),
     );
   }
-void modalconfirm() {
-  // Konversi nominalController.text ke double
-  double? nominal = double.tryParse(nominalController.text);
 
-  if (nominal != null) {
-    // Hitung 5% dari nominal
-    double adminFee = nominal * 0.05;
+  void modalconfirm() {
+    double? nominal = double.tryParse(nominalController.text);
 
-    showModalBottomSheet(
-      isDismissible: true,
-      enableDrag: true,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return Container(
-          width: double.infinity,
-          height: widget.dWidth / 1.2,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 20,
-          ),
-          decoration: const BoxDecoration(
-            color: DevColor.whiteColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+    if (nominal != null) {
+      double adminFee = nominal * 0.05;
+
+      showModalBottomSheet(
+        isDismissible: true,
+        enableDrag: true,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return Container(
+            width: double.infinity,
+            height: widget.dWidth / 1.2,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 20,
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Konfirmasi Transfer',
-                style: DevTypograph.heading3.bold.copyWith(
-                  color: DevColor.darkblue,
+            decoration: const BoxDecoration(
+              color: DevColor.whiteColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Konfirmasi Transfer',
+                  style: DevTypograph.heading3.bold.copyWith(
+                    color: DevColor.darkblue,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              Text(
-                'Bank Tujuan: $selectedBank',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
+                const SizedBox(
+                  height: 6,
                 ),
-              ),
-              Text(
-                'Rekening Tujuan: ${rekeningController.text}',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
+                Text(
+                  'Bank Tujuan: $selectedBank',
+                  style: DevTypograph.body1.bold.copyWith(
+                    color: DevColor.darkblue,
+                  ),
                 ),
-              ),
-              Text(
-                'Nominal: Rp ${nominalController.text}',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
+                Text(
+                  'Rekening Tujuan: ${rekeningController.text}',
+                  style: DevTypograph.body1.bold.copyWith(
+                    color: DevColor.darkblue,
+                  ),
                 ),
-              ),
-              // Tampilkan adminFee yang dihitung
-              Text(
-                'Admin Fee: Rp ${adminFee.toStringAsFixed(0)}',
-                style: DevTypograph.body1.bold.copyWith(
-                  color: DevColor.darkblue,
+                Text(
+                  'Nominal: Rp ${nominalController.text}',
+                  style: DevTypograph.body1.bold.copyWith(
+                    color: DevColor.darkblue,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Pastikan rekening tujuan benar dan nominal sesuai!',
-                style: DevTypograph.body1.regular.copyWith(
-                  color: DevColor.darkblue,
+                Text(
+                  'Biaya Admin: Rp ${adminFee.toStringAsFixed(0)}',
+                  style: DevTypograph.body1.bold.copyWith(
+                    color: DevColor.darkblue,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: DevButton(
-                  title: 'Konfirmasi',
-                  onPressed: () {
-                    sendTransfer();
-                  },
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  } else {
-    // Jika konversi nominal gagal, tampilkan pesan error
-    Get.snackbar(
-      'Input Salah',
-      'Nominal tidak valid, harap masukkan angka yang benar',
-      backgroundColor: DevColor.redColor,
-      colorText: DevColor.whiteColor,
-    );
+                Text(
+                  'Pastikan rekening tujuan benar dan nominal sesuai!',
+                  style: DevTypograph.body1.regular.copyWith(
+                    color: DevColor.darkblue,
+                  ),
+                ),
+                const Spacer(),
+                SizedBox(
+                  width: double.infinity,
+                  child: DevButton(
+                    title: 'Konfirmasi',
+                    onPressed: () {
+                      sendTransfer();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    } else {
+      Get.snackbar(
+        'Input Salah',
+        'Nominal tidak valid, harap masukkan angka yang benar',
+        backgroundColor: DevColor.redColor,
+        colorText: DevColor.whiteColor,
+      );
+    }
   }
-}
-
-
 }

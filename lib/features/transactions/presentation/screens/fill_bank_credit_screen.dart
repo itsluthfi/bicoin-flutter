@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/styles/dev_color.dart';
 import '../../../../core/styles/typography.dart';
@@ -18,7 +19,6 @@ class FillBankCreditScreen extends StatefulWidget {
 
 class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
   final amountCreditController = TextEditingController();
-
   final transactionController = Get.put(TransactionController());
   final keyForm = GlobalKey<FormState>();
 
@@ -26,10 +26,10 @@ class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
     var amountCredit = double.parse(amountCreditController.text);
 
     try {
-      await transactionController.fillBankCredit(amountCredit, 'pribadi');
+      await transactionController.fillBankCredit(amountCredit, 'Isi Saldo');
       await transactionController.getTransactionHistory();
       Get.snackbar(
-        'Success',
+        'Sukses',
         'Isi saldo ${amountCreditController.text} berhasil',
         backgroundColor: Colors.green,
         colorText: Colors.white,
@@ -39,13 +39,13 @@ class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
     } catch (e) {
       await transactionController.getTransactionHistory();
       Get.snackbar(
-        'Failed',
+        'Gagal',
         'Isi saldo ${amountCreditController.text} gagal',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
       );
-      log('error fill credit bank: $e');
+      log('error isi saldo: $e');
     }
   }
 
@@ -55,10 +55,8 @@ class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
       appBar: AppBar(
         backgroundColor: DevColor.darkblue,
         title: Text(
-          'Fill Bank Credit',
-          style: DevTypograph.heading3.bold.copyWith(
-            color: DevColor.whiteColor,
-          ),
+          'Isi Saldo',
+          style: DevTypograph.heading3.bold,
         ),
       ),
       body: Padding(
@@ -66,33 +64,69 @@ class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Anda dapat mengisi form di bawah ini untuk menyelesaikan transaksi',
-              style: DevTypograph.body1.bold,
+            // Kotak untuk Rekening Bank Kamu
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: DevColor.darkblue, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Rekening Bank Kamu',
+                      style: DevTypograph.heading2.bold.copyWith(
+                        color: DevColor.darkblue,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      return Text(
+                        'No. Rekening: ${transactionController.bankAccount}',
+                        style: DevTypograph.body1.bold.copyWith(
+                          color: DevColor.darkblue,
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 8),
+                    Obx(() {
+                      final saldo = transactionController.saldoAmount.value;
+                      return Text(
+                        'Saldo: Rp ${NumberFormat('#,##0', 'ID').format(saldo)}',
+                        style: DevTypograph.body1.bold.copyWith(
+                          color: DevColor.darkblue,
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(height: 24),
+
+            // Form dan tombol (tidak diubah)
             Form(
               key: keyForm,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Obx(
-                    () => Text(
-                      'Rekening Anda: ${transactionController.bankAccount}',
-                      style: DevTypograph.body2.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
                   DevTextField(
-                    title: 'Isi nominal',
+                    title: 'Nominal',
+                    // styleTitle: DevTypograph.body1.bold.copyWith(
+                    //   color: DevColor.darkblue,
+                    // ),
                     keyboardType: TextInputType.number,
                     controller: amountCreditController,
+                    colorBorder: DevColor.darkblue,
                   ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
                     child: DevButton(
-                      title: 'Submit',
+                      title: 'Selanjutnya',
                       onPressed: () async {
                         if (keyForm.currentState!.validate()) {
                           isiSaldo();

@@ -35,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   List<String> titleButton = [
-    'Transfer',
+    'Transfer Saldo',
     'Isi Saldo',
-    'Withdrawl',
+    'Penarikan Saldo',
   ];
 
   List<Widget> directionMenuButton = [
@@ -308,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     String accountLabel = dataHistory.type == 'credit' &&
                             dataHistory.sourceRekening != currentRek.toString()
                         ? 'Dari Akun'
-                        : 'Ke Akun';
+                        : '';
 
                     return cardListTransfer(
                       dataHistory.date,

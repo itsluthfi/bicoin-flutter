@@ -110,6 +110,7 @@ class TransactionController extends GetxController {
         dataNotification,
       );
       log('Saldo berhasil ditambahkan');
+      await getBankAmount();
     } catch (e) {
       log('Error di fillBankCredit: $e');
     }
