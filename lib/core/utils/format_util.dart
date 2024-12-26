@@ -44,9 +44,9 @@ extension RupiahFormatter on num {
   String toRupiah() {
     final formatter = NumberFormat.currency(
       locale: 'id_ID',
-      symbol: 'Rp',
+      symbol: '',
       decimalDigits: 0,
     );
-    return formatter.format(this);
+    return '${formatter.format(this)} ';
   }
 }

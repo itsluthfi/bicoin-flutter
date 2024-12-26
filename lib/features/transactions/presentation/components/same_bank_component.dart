@@ -212,13 +212,13 @@ class _SameBankComponentState extends State<SameBankComponent> {
                 ),
               ),
               Text(
-                'Nominal: Rp ${nominal.text}',
+                'Nominal: ${nominal.text} BIC',
                 style: DevTypograph.body1.bold.copyWith(
                   color: DevColor.darkblue,
                 ),
               ),
               Text(
-                'Biaya Admin: Rp 0',
+                'Biaya Admin: 0 BIC',
                 style: DevTypograph.body1.bold.copyWith(
                   color: DevColor.darkblue,
                 ),

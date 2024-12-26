@@ -102,7 +102,7 @@ class _WithdrawlScreenState extends State<WithdrawlScreen> {
                     Obx(() {
                       final saldo = transactionController.saldoAmount.value;
                       return Text(
-                        'Saldo: Rp ${NumberFormat('#,##0', 'ID').format(saldo)}',
+                        'Saldo: ${NumberFormat('#,##0', 'ID').format(saldo)} BIC',
                         style: DevTypograph.body1.bold.copyWith(
                           color: DevColor.darkblue,
                         ),

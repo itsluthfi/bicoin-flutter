@@ -174,13 +174,13 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
                   ),
                 ),
                 Text(
-                  'Nominal: Rp ${nominalController.text}',
+                  'Nominal: ${nominalController.text} BIC',
                   style: DevTypograph.body1.bold.copyWith(
                     color: DevColor.darkblue,
                   ),
                 ),
                 Text(
-                  'Biaya Admin: Rp ${adminFee.toStringAsFixed(0)}',
+                  'Biaya Admin: ${adminFee.toStringAsFixed(0)} BIC',
                   style: DevTypograph.body1.bold.copyWith(
                     color: DevColor.darkblue,
                   ),

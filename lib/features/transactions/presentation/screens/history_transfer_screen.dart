@@ -123,7 +123,7 @@ class _HistoryTransferScreenState extends State<HistoryTransferScreen> {
                 ),
               ),
               Text(
-                'Biaya Admin ${adminFee.toRupiah()}',
+                'Biaya Admin ${adminFee.toRupiah()}BIC',
                 style: DevTypograph.body1.medium.copyWith(
                   color: DevColor.darkblue,
                 ),
@@ -144,8 +144,12 @@ class _HistoryTransferScreenState extends State<HistoryTransferScreen> {
             children: [
               Text(
                 typeTransfer == 'debit'
-                    ? '- ${amountTransfer.toRupiah()}'
-                    : '+ ${amountTransfer.toRupiah()}',
+                    ? bankTujuan == 'Isi Saldo'
+                        ? '- ${amountTransfer.toRupiah()}BIC'
+                        : '- ${amountTransfer.toRupiah()}BIC'
+                    : bankTujuan == 'Isi Saldo'
+                        ? '+ ${amountTransfer.toRupiah()}BIC'
+                        : '+ ${amountTransfer.toRupiah()}BIC',
                 style: DevTypograph.body1.bold.copyWith(
                   color: DevColor.darkblue,
                 ),

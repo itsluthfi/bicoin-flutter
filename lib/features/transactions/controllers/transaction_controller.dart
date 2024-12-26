@@ -100,13 +100,13 @@ class TransactionController extends GetxController {
         "status": "done",
         "amount": amount.toString(),
         "message":
-            "Saldo Rp ${amount.toString()} ditambahkan ke $targetBankAccount",
+            "Saldo ${amount.toString()} BIC ditambahkan ke $targetBankAccount",
         "time": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
       };
 
       // Kirim pesan FCM
       fcmService.sendMessage(
-        'Saldo Rp $amount berhasil dikirim ke $targetBankAccount',
+        'Saldo $amount BIC berhasil dikirim ke $targetBankAccount',
         dataNotification,
       );
       log('Saldo berhasil ditambahkan');

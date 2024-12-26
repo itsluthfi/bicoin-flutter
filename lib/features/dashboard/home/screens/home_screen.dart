@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Obx(() {
                 var saldo = transactionController.saldoAmount.value;
                 return Text(
-                  'Saldo : Rp ${isShowAmount ? NumberFormat('#,##0', 'ID').format(saldo) : '******'}',
+                  'Saldo : ${isShowAmount ? NumberFormat('#,##0', 'ID').format(saldo) : '******'} BIC',
                   style: DevTypograph.body1.regular.copyWith(
                     color: DevColor.darkblue,
                   ),
@@ -380,8 +380,8 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 typeTransfer == 'debit'
-                    ? '- ${amountTransfer.toRupiah()}'
-                    : '+ ${amountTransfer.toRupiah()}',
+                    ? '- ${amountTransfer.toRupiah()}BIC'
+                    : '+ ${amountTransfer.toRupiah()}BIC',
                 textScaler: const TextScaler.linear(0.8),
                 style: DevTypograph.body1.bold.copyWith(
                   color: DevColor.darkblue,

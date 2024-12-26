@@ -33,8 +33,8 @@ class TransactionDifferentBankController extends GetxController {
     //   '/org.meetcoin.participant.Merchant',
     // );
     // var result = response.data as List<dynamic>;
-    bankList.value = ['bri', 'bni', 'mandiri', 'bca', 'cimb niaga'];
-    bankUsername.value = ['bri', 'bni', 'mandiri', 'bca', 'cimb_niaga'];
+    bankList.value = ['bri'];
+    bankUsername.value = ['bri'];
     // } catch (e) {
     //   log('Exception occurred: $e');
     // }
