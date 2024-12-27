@@ -82,12 +82,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Email',
                 // colorBorder: DevColor.darkblue,
                 controller: usernameController,
+                hint: 'user1234@gmail.com',
               ),
               const SizedBox(height: 10),
               DevTextField(
                 title: 'Password',
                 controller: passwordController,
                 isPassword: true,
+                hint: 'user1234',
               ),
               const SizedBox(height: 24),
               Obx(() {

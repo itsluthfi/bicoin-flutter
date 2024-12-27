@@ -6,6 +6,7 @@ class DevTextField extends StatelessWidget {
   const DevTextField({
     super.key,
     required this.title,
+    required this.hint,
     this.isPassword = false,
     required this.controller,
     this.keyboardType = TextInputType.text,
@@ -18,6 +19,7 @@ class DevTextField extends StatelessWidget {
   });
 
   final String title;
+  final String hint;
   final bool isPassword;
   final TextEditingController controller;
   final TextInputType keyboardType;
@@ -55,7 +57,7 @@ class DevTextField extends StatelessWidget {
                   vertical: 10,
                   horizontal: 18,
                 ),
-                hintText: 'Masukan ${title.toLowerCase()} anda',
+                hintText: '${hint}',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(

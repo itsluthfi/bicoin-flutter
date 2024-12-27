@@ -120,6 +120,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
             // ),
             colorBorder: DevColor.darkblue,
             controller: bankTujuan,
+            hint: 'Masukan bank tujuan anda',
           ),
           SizedBox(
             height: widget.dWidth / 20,
@@ -132,6 +133,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
             keyboardType: TextInputType.number,
             colorBorder: DevColor.darkblue,
             controller: rekeningTujuan,
+            hint: '1234',
           ),
           SizedBox(
             height: widget.dWidth / 20,
@@ -144,6 +146,7 @@ class _SameBankComponentState extends State<SameBankComponent> {
             keyboardType: TextInputType.number,
             colorBorder: DevColor.darkblue,
             controller: nominal,
+            hint: 'Masukan nominal anda',
           ),
           SizedBox(
             height: widget.dWidth / 10,

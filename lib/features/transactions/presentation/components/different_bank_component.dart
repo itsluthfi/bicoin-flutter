@@ -97,6 +97,7 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
             keyboardType: TextInputType.number,
             controller: rekeningController,
             colorBorder: DevColor.darkblue,
+            hint: '4321',
           ),
           SizedBox(
             height: widget.dWidth / 40,
@@ -106,6 +107,7 @@ class _DifferentBankComponentState extends State<DifferentBankComponent> {
             keyboardType: TextInputType.number,
             controller: nominalController,
             colorBorder: DevColor.darkblue,
+            hint: 'Masukan nominal anda',
           ),
           SizedBox(
             height: widget.dWidth / 10,

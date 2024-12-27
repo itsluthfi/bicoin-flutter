@@ -121,6 +121,7 @@ class _FillBankCreditScreenState extends State<FillBankCreditScreen> {
                     keyboardType: TextInputType.number,
                     controller: amountCreditController,
                     colorBorder: DevColor.darkblue,
+                    hint: 'Masukan nominal anda',
                   ),
                   const SizedBox(height: 24),
                   SizedBox(

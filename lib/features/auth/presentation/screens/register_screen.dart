@@ -72,28 +72,33 @@ class RegisterScreen extends StatelessWidget {
               DevTextField(
                 title: 'Username',
                 controller: usernameController,
+                hint: 'Masukan username anda',
               ),
               const SizedBox(height: 10),
               DevTextField(
                 title: 'Nama',
                 controller: nameController,
+                hint: 'Masukan nama anda',
               ),
               const SizedBox(height: 10),
               DevTextField(
                 title: 'Email',
                 controller: emailController,
+                hint: 'Masukan email anda',
               ),
               const SizedBox(height: 10),
               DevTextField(
                 title: 'Nomor telepon',
                 controller: phoneController,
                 keyboardType: TextInputType.number,
+                hint: 'Masukan nomor telepon anda',
               ),
               const SizedBox(height: 10),
               DevTextField(
                 title: 'Password',
                 controller: passwordController,
                 isPassword: true,
+                hint: 'Masukan password anda',
               ),
               const SizedBox(height: 24),
               Obx(() {
