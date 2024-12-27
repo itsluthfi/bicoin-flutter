@@ -117,12 +117,12 @@ class TransactionController extends GetxController {
   }
 
   Future<void> debitBankCredit(
-    double amount,
-    String bankTujuan,
-    String status,
-    String typeBank,
-    double? adminFee,
-  ) async {
+      double amount,
+      String bankTujuan,
+      String status,
+      String typeBank,
+      double? adminFee,
+      ) async {
     var getBankAccount = homeController.bankAccount.value;
 
     try {
@@ -135,9 +135,31 @@ class TransactionController extends GetxController {
         double currentAmount = (bankDoc['amount'] as num).toDouble();
         log('Saldo sekarang: $currentAmount');
 
+        double totalDebit = amount + (adminFee ?? 0.0);
+
+        // Periksa apakah saldo cukup
+        if (currentAmount < totalDebit) {
+          log('Transaksi gagal: Saldo tidak mencukupi');
+          await firestoreService.addData(
+            'bankAccounts/$getBankAccount/transactionsHistory',
+            {
+              'type': 'debit',
+              'type_bank': typeBank,
+              'status': 'FAILED',
+              'target_rekening': bankTujuan,
+              'source_rekening': getBankAccount,
+              'amount': amount,
+              'admin_fee': adminFee ?? 0,
+              'date': DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+            },
+          );
+          return; // Keluar dari fungsi jika saldo tidak cukup
+        }
+
+        // Lanjutkan jika saldo cukup
         double updatedAmount = currentAmount;
         if (status == 'SUCCESS') {
-          updatedAmount -= amount + (adminFee ?? 0.0);
+          updatedAmount -= totalDebit;
         }
 
         await firestoreService.setData(

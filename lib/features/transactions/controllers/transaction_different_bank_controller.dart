@@ -87,6 +87,21 @@ class TransactionDifferentBankController extends GetxController {
       // Menghitung 5% dari amount
       double adminFee = amount * 0.05;
 
+      // Mengecek saldo sebelum melanjutkan transaksi
+      double currentSaldo = await transactionController.getBankAmount();
+      double totalDebit = amount + adminFee;
+
+      if (currentSaldo < totalDebit) {
+        log('Transaksi gagal: Saldo tidak mencukupi');
+        Get.snackbar(
+          'Transaksi Gagal',
+          'Saldo tidak mencukupi untuk transaksi ini',
+          backgroundColor: DevColor.redColor,
+          colorText: DevColor.whiteColor,
+        );
+        return;
+      }
+
       if (bankSelectedUsername.value == typeBankTujuan) {
         // Ketika bank sama, kurangi amount dari rekening sekarang
         await transactionController.debitBankCredit(
@@ -103,6 +118,13 @@ class TransactionDifferentBankController extends GetxController {
           typeBankTujuan,
           adminFee: adminFee, // Menggunakan adminFee yang dihitung
           bankAccount: rekening,
+        );
+
+        Get.snackbar(
+          'Sukses',
+          'Transaksi Berhasil',
+          backgroundColor: DevColor.greenColor,
+          colorText: DevColor.whiteColor,
         );
 
         // Buat transaksi

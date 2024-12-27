@@ -45,46 +45,8 @@ class _SameBankComponentState extends State<SameBankComponent> {
       bool rekeningExists =
           await transactionController.findRekening(rekeningTujuan.text);
 
-      if (rekeningExists) {
-        await transactionController.debitBankCredit(
-          amount,
-          rekeningTujuan.text,
-          'SUCCESS',
-          'BiCoin',
-          0,
-        );
-
-        await transactionController.fillBankCredit(
-          amount,
-          'BiCoin',
-          bankAccount: rekeningTujuan.text,
-          adminFee: 0,
-        );
-
-        await transactionController.createTransaction(amount);
-
-        log('Transaksi berhasil dilakukan');
-        transactionController.loadInitialData();
-        Get.snackbar(
-          'Sukses',
-          'Transfer ke Rekening ${rekeningTujuan.text} berhasil',
-          backgroundColor: DevColor.greenColor,
-          colorText: DevColor.whiteColor,
-          snackPosition: SnackPosition.TOP,
-        );
-
-        if (mounted) {
-          transactionController.loadInitialData();
-          Navigator.pop(context);
-        }
-      } else {
-        await transactionController.debitBankCredit(
-          amount,
-          rekeningTujuan.text,
-          'FAILED',
-          'BiCoin',
-          0,
-        );
+      if (!rekeningExists) {
+        log('Rekening tidak ditemukan');
         Get.snackbar(
           'Failed',
           'Rekening ${rekeningTujuan.text} tidak ditemukan',
@@ -92,15 +54,82 @@ class _SameBankComponentState extends State<SameBankComponent> {
           colorText: DevColor.whiteColor,
           snackPosition: SnackPosition.TOP,
         );
+
         if (mounted) {
           transactionController.loadInitialData();
           Navigator.pop(context);
         }
+        return; // Menghentikan eksekusi jika rekening tidak ditemukan
+      }
 
-        log('Rekening tidak ditemukan');
+      // Validasi saldo sebelum melanjutkan
+      double currentSaldo = await transactionController.getBankAmount();
+      if (currentSaldo < amount) {
+        log('Transaksi gagal: Saldo tidak mencukupi');
+        Get.snackbar(
+          'Transaksi Gagal',
+          'Saldo tidak mencukupi untuk transaksi ini',
+          backgroundColor: DevColor.redColor,
+          colorText: DevColor.whiteColor,
+          snackPosition: SnackPosition.TOP,
+        );
+
+        if (mounted) {
+          transactionController.loadInitialData();
+          Navigator.pop(context);
+        }
+        return; // Menghentikan eksekusi jika saldo tidak mencukupi
+      }
+
+      // Proses debit dari rekening pengguna
+      await transactionController.debitBankCredit(
+        amount,
+        rekeningTujuan.text,
+        'SUCCESS',
+        'BiCoin',
+        0,
+      );
+
+      // Proses kredit ke rekening tujuan
+      await transactionController.fillBankCredit(
+        amount,
+        'BiCoin',
+        bankAccount: rekeningTujuan.text,
+        adminFee: 0,
+      );
+
+      // Buat transaksi
+      await transactionController.createTransaction(amount);
+
+      log('Transaksi berhasil dilakukan');
+      transactionController.loadInitialData();
+
+      Get.snackbar(
+        'Sukses',
+        'Transfer ke Rekening ${rekeningTujuan.text} berhasil',
+        backgroundColor: DevColor.greenColor,
+        colorText: DevColor.whiteColor,
+        snackPosition: SnackPosition.TOP,
+      );
+
+      if (mounted) {
+        transactionController.loadInitialData();
+        Navigator.pop(context);
       }
     } catch (e) {
       log('Error validating bank account: $e');
+      Get.snackbar(
+        'Error',
+        'Terjadi kesalahan saat memproses transaksi',
+        backgroundColor: DevColor.redColor,
+        colorText: DevColor.whiteColor,
+        snackPosition: SnackPosition.TOP,
+      );
+
+      if (mounted) {
+        transactionController.loadInitialData();
+        Navigator.pop(context);
+      }
       rethrow;
     }
   }
